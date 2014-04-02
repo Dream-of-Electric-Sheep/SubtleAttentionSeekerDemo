@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">AttentionSeekerDemo</string>
+  <string name="seeking_attention">Seeking attention? :)</string>
+  <string name="tada">Ta-da!</string>
+  <string name="nope">Nope!</string>
+  <string name="action_add_person">Add person</string>
+  <string name="action_settings">Settings</string>
+
+</resources>
