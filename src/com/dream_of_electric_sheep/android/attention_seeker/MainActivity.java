@@ -15,6 +15,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.nineoldandroids.animation.Keyframe;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.PropertyValuesHolder;
+import com.nineoldandroids.view.animation.AnimatorProxy;
 
 /**
  * Based on <a href="https://plus.google.com/u/0/118417777153109946393/posts/FABaJhRMCuy">Cyril
@@ -104,21 +105,24 @@ public class MainActivity extends SherlockFragmentActivity {
         Keyframe.ofFloat(.4f, -3f * shakeFactor), Keyframe.ofFloat(.5f, 3f * shakeFactor),
         Keyframe.ofFloat(.6f, -3f * shakeFactor), Keyframe.ofFloat(.7f, 3f * shakeFactor),
         Keyframe.ofFloat(.8f, -3f * shakeFactor), Keyframe.ofFloat(.9f, 3f * shakeFactor),
-        Keyframe.ofFloat(1f, 0));
+        Keyframe.ofFloat(1f, 0f));
 
-    return ObjectAnimator.ofPropertyValuesHolder(view, pvhScaleX, pvhScaleY, pvhRotate)
-        .setDuration(1000);
+    return ObjectAnimator.ofPropertyValuesHolder(
+        AnimatorProxy.NEEDS_PROXY ? AnimatorProxy.wrap(view) : view, pvhScaleX, pvhScaleY,
+        pvhRotate).setDuration(1000);
   }
 
   public static ObjectAnimator nope(View view) {
-    int delta = view.getResources().getDimensionPixelOffset(R.dimen.spacing_medium);
+    float delta = view.getResources().getDimensionPixelOffset(R.dimen.spacing_medium);
 
     PropertyValuesHolder pvhTranslateX = PropertyValuesHolder.ofKeyframe("translationX",
-        Keyframe.ofFloat(0f, 0), Keyframe.ofFloat(.10f, -delta), Keyframe.ofFloat(.26f, delta),
+        Keyframe.ofFloat(0f, 0f), Keyframe.ofFloat(.10f, -delta), Keyframe.ofFloat(.26f, delta),
         Keyframe.ofFloat(.42f, -delta), Keyframe.ofFloat(.58f, delta),
         Keyframe.ofFloat(.74f, -delta), Keyframe.ofFloat(.90f, delta), Keyframe.ofFloat(1f, 0f));
 
-    return ObjectAnimator.ofPropertyValuesHolder(view, pvhTranslateX).setDuration(500);
+    return ObjectAnimator.ofPropertyValuesHolder(
+        AnimatorProxy.NEEDS_PROXY ? AnimatorProxy.wrap(view) : view, pvhTranslateX)
+        .setDuration(500);
   }
 
   /**
